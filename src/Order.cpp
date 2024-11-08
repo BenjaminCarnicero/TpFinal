@@ -12,32 +12,37 @@ Order::Order(string _code, Customer* _customer, Employee* _employee) {
   }
 
   
-  void Order::attach(Article* _article) {
+void Order::attachDetails(OrderDetails* _orderDetails) {
 
-    this->articleList.push_back(_article);
+    this->orderDetailsList.push_back(_orderDetails);
   }
 
 
-  void Order::getShow () {
+
+void Order::showOrder () {
+  double totalPrice = 0;
     
+  cout << "-------------------PRODUCTOS CARNICOS---------------------------" << endl;
+  cout << "Codigo de la orden: " << code << endl;
+  cout << "Cliente: " << customer->getName() << endl;
+  cout << endl;
+  cout << "Atendido por empleado: " << employee->getName() << endl;
+  cout << "Cargo: " << employee->getJobTittle() << endl;
+  cout << endl;
+  cout << "--------------------------------------------" << endl;
 
-    cout << "Cliente: " << this->customer->getName() << endl;
-    cout << endl;
-    cout << endl;
+  // Recorrer cada OrderDetails en la lista y mostrar sus detalles
+  for (OrderDetails* orderDetails : orderDetailsList) {
+      orderDetails->showOrDetails();  // Llama a showOrDetails para mostrar cada detalle del producto
+      totalPrice += orderDetails->setSubtotal();  // Sumo el subtotal de cada detalle
+  }
 
-    cout << "Atendido por empleado: " << this->employee->getName() << endl;
-    cout << "Cargo: " << this->employee->getJobTittle() << endl;
-    cout << endl;
-    
-
-    for (Article* article : articleList) {
-      
-      cout << "Articulo nro: " << article->getCode() << endl;
-      cout << "Nombre del articulo: " << article->getName() << endl;
-      cout << "Precio del articulo: " << article->getPrice() << endl;
-      cout << endl;
-    }
-
-    cout << "--------------------------------------------" << endl;
+  cout << "--------------------------------------------" << endl;
+  cout << endl;
+  cout << "Precio total de la orden: $" << totalPrice << endl;
+  cout << "--------------------------------------------" << endl;
+  cout << endl;
+  cout << "Gracias por su compra. " << endl;
+  cout << endl;
 
   }

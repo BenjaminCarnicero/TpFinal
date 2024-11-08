@@ -6,7 +6,8 @@
 #include <string>
 #include <list>
 
-#include "Article.hpp"
+#include "MeatProduct.hpp"
+#include "OrderDetails.hpp"
 #include "Customer.hpp"
 #include "Employee.hpp"
 
@@ -19,14 +20,15 @@ class Order {
         string code;
         Customer* customer;
         Employee* employee;
-        list<Article*> articleList;
+        list<OrderDetails*> orderDetailsList;
         
     
     public:
         Order(string _code, Customer* _customer, Employee* _employee);
         // ~Order();
-        void attach (Article* _article);
-        void getShow();
+        void attachDetails (OrderDetails* _orderDetails);
+        void showOrder();
+        
 
         
 };
